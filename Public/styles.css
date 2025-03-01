@@ -1,0 +1,71 @@
+/* 整体页面字体设置 */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* 资源项样式 */
+.resource-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.resource-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* 资源标题样式 */
+.resource-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* 资源描述样式 */
+.resource-description {
+    color: #555;
+    margin: 5px 0;
+}
+
+/* 无搜索结果提示样式 */
+.no-result {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* 小屏幕设备（如手机） */
+@media (max-width: 576px) {
+    .resource-title {
+        font-size: 18px; /* 缩小标题字体大小 */
+    }
+
+    .resource-description {
+        font-size: 14px; /* 缩小描述字体大小 */
+    }
+}
+
+/* 中等屏幕设备（如平板） */
+@media (min-width: 577px) and (max-width: 768px) {
+    /* 可以根据需要调整资源项的内边距等 */
+    .resource-item {
+        padding: 8px 0;
+    }
+}
+/* 添加Bootstrap图标 */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+/* 导航栏样式优化 */
+.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+#logoutBtn {
+    transition: all 0.3s;
+    padding: 8px 20px;
+}
+
+#logoutBtn:hover {
+    background-color: #e9ecef !important;
+    transform: translateY(-2px);
+}
