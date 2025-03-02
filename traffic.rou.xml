@@ -1,0 +1,10 @@
+<!-- traffic.rou.xml -->
+<routes>
+  <!-- 东西方向车流 -->
+  <flow id="east_west" color="1,0,0" from="edge1" to="edge3"
+        begin="0" end="3600" vehsPerHour="800"/>
+
+  <!-- 南北方向车流 -->
+  <flow id="north_south" color="0,0,1" from="edge2" to="edge4"
+        begin="0" end="3600" vehsPerHour="600"/>
+</routes>
