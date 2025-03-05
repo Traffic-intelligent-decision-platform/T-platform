@@ -1,10 +1,29 @@
-<!-- traffic.rou.xml -->
-<routes>
-  <!-- 东西方向车流 -->
-  <flow id="east_west" color="1,0,0" from="edge1" to="edge3"
-        begin="0" end="3600" vehsPerHour="800"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
 
-  <!-- 南北方向车流 -->
-  <flow id="north_south" color="0,0,1" from="edge2" to="edge4"
-        begin="0" end="3600" vehsPerHour="600"/>
+    <!-- 定义从 A2 到 B2 的车辆流 -->
+    <flow id="A2_to_B2" color="1,0,0" from="A2B2" to="B2B1"
+          begin="0" end="3600" vehsPerHour="200"/>
+
+    <!-- 定义从 B1 到 B2 的车辆流 -->
+    <flow id="B1_to_B2" color="0,1,0" from="B1B2" to="B2C2"
+          begin="0" end="3600" vehsPerHour="150"/>
+
+    <!-- 定义从 B2 到 A2 的车辆流 -->
+    <flow id="B2_to_A2" color="0,0,1" from="B2A2" to="A2B2"
+          begin="0" end="3600" vehsPerHour="100"/>
+
+    <!-- 定义从 B2 到 B1 的车辆流 -->
+    <flow id="B2_to_B1" color="1,1,0" from="B2B1" to="B1B2"
+          begin="0" end="3600" vehsPerHour="80"/>
+
+    <!-- 定义从 B2 到 B3 的车辆流 -->
+    <flow id="B2_to_B3" color="0,1,1" from="B2B3" to="B3B2"
+          begin="0" end="3600" vehsPerHour="120"/>
+
+    <!-- 定义从 B2 到 C2 的车辆流 -->
+    <flow id="B2_to_C2" color="1,0,1" from="B2C2" to="C2B2"
+          begin="0" end="3600" vehsPerHour="90"/>
+
 </routes>

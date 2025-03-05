@@ -1,10 +1,4 @@
-let timeoutId;
-// 假设的switchLight函数，实际需按业务完善
-function switchLight(status) {
-    console.log(`切换信号灯状态为 ${status}`);
-    // 这里可以添加与后端交互，真正切换信号灯状态的代码
-}
-
+// 初始化 ECharts 图表
 function initChart() {
     const chart = echarts.init(document.getElementById('traffic-map'));
     chart.setOption({
@@ -13,17 +7,65 @@ function initChart() {
         yAxis: { type: 'value' },
         series: [{ data: [], type: 'line' }]
     });
-    const ws = new WebSocket('ws://localhost:3000/ws');
+
+    // WebSocket 连接
+    const ws = new WebSocket('ws://localhost:3000');
     ws.onmessage = (e) => {
+    try {
         const data = JSON.parse(e.data);
-        chart.appendData({ seriesIndex: 0, data: [[data.timestamp, data.vehicle_count]] });
+        if (data.timestamp && data.vehicle_count) {
+            console.log('收到交通数据:', data);
+            // 更新图表数据
+            chart.appendData({ seriesIndex: 0, data: [data.timestamp, data.vehicle_count] });
+        } else {
+            console.error('数据格式不正确，缺少必要字段');
+        }
+    } catch (error) {
+        console.error('解析数据时出错:', error);
+    }
+};
+
+    ws.onerror = (error) => {
+        console.error('WebSocket 错误:', error);
+    };
+
+    ws.onclose = () => {
+        console.log('WebSocket 连接关闭');
     };
 }
 
-// 退出登录功能
+// 切换信号灯
+function switchLight(color) {
+    fetch(`/api/switch-light?color=${color}`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('切换信号灯失败');
+        }
+        alert('信号灯已切换');
+    })
+    .catch(error => {
+        console.error('错误:', error);
+        alert('切换信号灯失败');
+    });
+}
+
+// 退出登录
 document.getElementById('logoutBtn')?.addEventListener('click', () => {
-    // 清除本地存储
     localStorage.removeItem('token');
-    // 跳转登录页
     window.location.href = 'login.html';
+});
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html';
+    } else {
+        initChart(); // 初始化图表
+    }
 });
